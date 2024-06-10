@@ -24,7 +24,7 @@ export const useRegisterUser = () => {
     }
   };
 
-  const { mutate: registerUser } = useMutation(registerUserRequest, {
+  const { mutate: registerUser, isLoading } = useMutation(registerUserRequest, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('validateToken');
       toast.success('User Registered Successfully');
@@ -37,6 +37,7 @@ export const useRegisterUser = () => {
 
   return {
     registerUser,
+    isLoading,
   };
 };
 
@@ -89,7 +90,7 @@ export const useSignOutUser = () => {
     }
   };
 
-  const { mutate: signOutUser } = useMutation(signOutUserRequest, {
+  const { mutate: signOutUser, isLoading } = useMutation(signOutUserRequest, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('validateToken');
       toast.success('User Signed Out Successfully');
@@ -102,6 +103,7 @@ export const useSignOutUser = () => {
 
   return {
     signOutUser,
+    isLoading,
   };
 };
 

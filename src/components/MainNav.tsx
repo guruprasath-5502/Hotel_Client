@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
 import { useAppContext } from '@/contexts/App.Context';
 import { useSignOutUser } from '@/api/UserApi';
+import { Loader2 } from 'lucide-react';
 
 const MainNav = () => {
   const { isLoggedIn } = useAppContext();
-  const { signOutUser } = useSignOutUser();
+  const { signOutUser, isLoading } = useSignOutUser();
 
   const signOut = () => {
     signOutUser();
@@ -35,6 +36,7 @@ const MainNav = () => {
             onClick={signOut}
             className='bg-white text-blue-700 font-bold hover:bg-gray-50'
           >
+            {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
             Sign Out
           </Button>
         </>

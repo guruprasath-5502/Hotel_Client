@@ -1,5 +1,6 @@
 import { useRegisterUser } from '@/api/UserApi';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 
 export type RegisterFormData = {
@@ -18,7 +19,7 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  const { registerUser } = useRegisterUser();
+  const { registerUser, isLoading } = useRegisterUser();
 
   const onSubmit = handleSubmit((data) => {
     registerUser(data);
@@ -102,6 +103,7 @@ const Register = () => {
           type='submit'
           className='bg-blue-700 text-white font-bold text-xl hover:bg-blue-600 flex items-center'
         >
+          {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
           Create Account
         </Button>
       </span>
