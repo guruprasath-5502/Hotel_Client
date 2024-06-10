@@ -58,7 +58,7 @@ export const useSignInUser = () => {
     }
   };
 
-  const { mutate: signInUser } = useMutation(signInUserRequest, {
+  const { mutate: signInUser, isLoading } = useMutation(signInUserRequest, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('validateToken');
       toast.success('User Signed In Successfully');
@@ -71,6 +71,7 @@ export const useSignInUser = () => {
 
   return {
     signInUser,
+    isLoading,
   };
 };
 

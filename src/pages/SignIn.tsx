@@ -1,5 +1,6 @@
 import { useSignInUser } from '@/api/UserApi';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<SignInFormData>();
 
-  const { signInUser } = useSignInUser();
+  const { signInUser, isLoading } = useSignInUser();
 
   const onSubmit = handleSubmit((data) => {
     signInUser(data);
@@ -62,6 +63,7 @@ const SignIn = () => {
           type='submit'
           className='bg-blue-700 text-white font-bold text-xl hover:bg-blue-600 '
         >
+          {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
           Sign In
         </Button>
       </span>
