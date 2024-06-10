@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
-    <div className='bg-blue-800 p-5'>
-      <div className='container mx-auto flex flex-col md:flex-row justify-between items-center'>
+    <div className='bg-blue-800 px-0 py-5'>
+      <div className='container mx-auto flex flex-col md:flex-row justify-between gap-2 items-center'>
         <span className='text-2xl text-white font-bold tracking-tight'>
           Holidays
         </span>

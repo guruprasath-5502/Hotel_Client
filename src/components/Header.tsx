@@ -3,7 +3,7 @@ import MobileNav from './MobileNav';
 import MainNav from './MainNav';
 const Header = () => {
   return (
-    <div className='bg-blue-800 p-5'>
+    <div className='bg-blue-800 px-0 py-5'>
       <div className='container mx-auto flex justify-between'>
         <span className='text-3xl text-white font-bold tracking-tight'>
           <Link to={'/'}>Holidays</Link>
