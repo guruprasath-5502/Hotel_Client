@@ -12,12 +12,12 @@ export const AppContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const { isError } = useValidateToken();
+  const { isError, isLoading } = useValidateToken();
 
   return (
     <AppContext.Provider
       value={{
-        isLoggedIn: !isError,
+        isLoggedIn: !isError && !isLoading,
       }}
     >
       {children}

@@ -115,16 +115,17 @@ export const useValidateToken = () => {
     }
   };
 
-  const { data: validateToken, isError } = useQuery(
-    'validateToken',
-    getValidateTokenRequest,
-    {
-      retry: false,
-    }
-  );
+  const {
+    data: validateToken,
+    isError,
+    isLoading,
+  } = useQuery('validateToken', getValidateTokenRequest, {
+    retry: false,
+  });
 
   return {
     validateToken,
     isError,
+    isLoading,
   };
 };
