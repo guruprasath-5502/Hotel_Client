@@ -5,7 +5,6 @@ export const hotelTypes = [
   'Ski Resort',
   'Business',
   'Family',
-  'Romantic',
   'Hiking Resort',
   'Cabin',
   'Beach Resort',
