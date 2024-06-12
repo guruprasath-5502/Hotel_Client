@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 
 type AppContext = {
   isLoggedIn: boolean;
+  isAuthLoading: boolean;
 };
 
 const AppContext = React.createContext<AppContext | undefined>(undefined);
@@ -17,6 +18,7 @@ export const AppContextProvider = ({
   return (
     <AppContext.Provider
       value={{
+        isAuthLoading: isLoading,
         isLoggedIn: !isError && !isLoading,
       }}
     >

@@ -34,6 +34,7 @@ const MainNav = () => {
           </Link>
           <Button
             onClick={signOut}
+            disabled={isLoading}
             className='bg-white text-blue-700 font-bold hover:bg-gray-50'
           >
             {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}

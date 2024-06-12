@@ -15,7 +15,7 @@ import { Separator } from './ui/separator';
 
 const MobileNav = () => {
   const { isLoggedIn } = useAppContext();
-  const { signOutUser } = useSignOutUser();
+  const { signOutUser, isLoading } = useSignOutUser();
 
   const signOut = () => {
     signOutUser();
@@ -29,7 +29,7 @@ const MobileNav = () => {
       <SheetContent className='space-y-3'>
         <SheetTitle>
           <span className='flex text-blue-700 justify-center font-bold gap-2 xss:text-sm'>
-            Welcome to Bookings
+            Welcome to Holidays
           </span>
         </SheetTitle>
         <Separator />
@@ -39,7 +39,7 @@ const MobileNav = () => {
               <SheetClose asChild>
                 <Link to='/my-bookings'>
                   <Button
-                    className='text-blue-500 flex w-full justify-center items-center font-bold'
+                    className='text-slate-600 flex w-full justify-center items-center font-bold'
                     variant={'ghost'}
                   >
                     My Bookings
@@ -49,7 +49,7 @@ const MobileNav = () => {
               <SheetClose asChild>
                 <Link to='/my-hotels'>
                   <Button
-                    className='text-blue-500 flex  w-full justify-center items-center font-bold'
+                    className='text-slate-600 flex  w-full justify-center items-center font-bold'
                     variant={'ghost'}
                   >
                     My Hotels
@@ -58,6 +58,7 @@ const MobileNav = () => {
               </SheetClose>
               <SheetClose asChild>
                 <Button
+                  disabled={isLoading}
                   onClick={signOut}
                   className='bg-blue-700 text-white font-bold hover:bg-gray-100'
                 >

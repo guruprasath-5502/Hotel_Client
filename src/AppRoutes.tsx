@@ -2,6 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './layouts/Layout';
 import Register from './pages/Register';
 import SignIn from './pages/SignIn';
+import ProtectedRoute from './auth/ProtectedRoute';
+import AddHotel from './pages/AddHotel';
 
 const AppRoutes = () => {
   return (
@@ -40,6 +42,17 @@ const AppRoutes = () => {
           </Layout>
         }
       />
+
+      <Route element={<ProtectedRoute />}>
+        <Route
+          path='/add-hotel'
+          element={
+            <Layout>
+              <AddHotel />
+            </Layout>
+          }
+        />
+      </Route>
 
       <Route path='*' element={<Navigate to='/' />} />
     </Routes>
