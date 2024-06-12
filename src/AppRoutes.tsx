@@ -45,7 +45,7 @@ const AppRoutes = () => {
 
       <Route element={<ProtectedRoute />}>
         <Route
-          path='/add-hotel'
+          path='/my-hotels'
           element={
             <Layout>
               <AddHotel />
