@@ -20,3 +20,8 @@ export type HotelObj = {
   lastUpdated: string;
   flgUseStatus: number;
 };
+
+export type AllHotels = {
+  status: boolean;
+  data: HotelObj[];
+};

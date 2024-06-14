@@ -1,13 +1,11 @@
-import { HotelFormData } from '@/forms/ManageHotelForm/ManageHotelForm';
-import { useMutation } from 'react-query';
+import { AllHotels, Hotel } from '@/types';
+import { useMutation, useQuery } from 'react-query';
 import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const useCreateHotel = () => {
-  const createHotelRequest = async (
-    formData: FormData
-  ): Promise<HotelFormData> => {
+  const createHotelRequest = async (formData: FormData): Promise<Hotel> => {
     const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
       method: 'POST',
       credentials: 'include',
@@ -32,6 +30,35 @@ export const useCreateHotel = () => {
 
   return {
     createHotel,
+    isLoading,
+  };
+};
+
+export const useGetHotels = () => {
+  const getHotelsRequest = async (): Promise<AllHotels> => {
+    const response = await fetch(`${API_BASE_URL}/api/my-hotels`, {
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch hotels');
+    }
+
+    return response.json();
+  };
+
+  const {
+    data: hotels,
+    isLoading,
+    error,
+  } = useQuery('fetchHotels', getHotelsRequest);
+
+  if (error) {
+    toast.error(error.toString());
+  }
+
+  return {
+    hotels,
     isLoading,
   };
 };
