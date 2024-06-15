@@ -5,6 +5,7 @@ import SignIn from './pages/SignIn';
 import ProtectedRoute from './auth/ProtectedRoute';
 import AddHotel from './pages/AddHotel';
 import MyHotels from './pages/MyHotels';
+import EditHotel from './pages/EditHotel';
 
 const AppRoutes = () => {
   return (
@@ -58,6 +59,15 @@ const AppRoutes = () => {
           element={
             <Layout>
               <AddHotel />
+            </Layout>
+          }
+        />
+
+        <Route
+          path='/edit-hotel/:hotelId'
+          element={
+            <Layout>
+              <EditHotel />
             </Layout>
           }
         />

@@ -5,8 +5,10 @@ import FacilitiesSection from './FacilitiesSection';
 import GuestSection from './GuestSection';
 import ImageSection from './ImageSection';
 import { Button } from '@/components/ui/button';
-import { useCreateHotel } from '@/api/HotelApi';
+import { useCreateHotel, useUpdateHotelById } from '@/api/HotelApi';
 import { Loader2 } from 'lucide-react';
+import { HotelObj } from '@/types';
+import { useEffect } from 'react';
 
 export type HotelFormData = {
   name: string;
@@ -20,17 +22,33 @@ export type HotelFormData = {
   childCount: number;
   facilities: string[];
   imageFiles: FileList;
+  imageUrls: string[];
 };
 
-const ManageHotelForm = () => {
+type Props = {
+  hotel?: HotelObj;
+  isEdit: boolean;
+};
+
+const ManageHotelForm = ({ hotel, isEdit = false }: Props) => {
   const formMethods = useForm<HotelFormData>();
 
-  const { createHotel, isLoading } = useCreateHotel();
+  const { createHotel, isLoading: isCreateLoading } = useCreateHotel();
 
-  const { handleSubmit } = formMethods;
+  const { updateHotel, isLoading: isEditLoading } = useUpdateHotelById();
+
+  const { handleSubmit, reset } = formMethods;
+
+  useEffect(() => {
+    reset(hotel);
+  }, [hotel, reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
     const formData = new FormData();
+
+    if (hotel) {
+      formData.append('hotelId', hotel._id.toString());
+    }
     formData.append('name', formDataJson.name);
     formData.append('city', formDataJson.city);
     formData.append('country', formDataJson.country);
@@ -45,11 +63,21 @@ const ManageHotelForm = () => {
       formData.append(`facilities[${index}]`, facility);
     });
 
+    if (formDataJson.imageUrls) {
+      formDataJson.imageUrls.forEach((urls, index) => {
+        formData.append(`imageUrls[${index}]`, urls);
+      });
+    }
+
     Array.from(formDataJson.imageFiles).forEach((imageFile) => {
       formData.append(`imageFiles`, imageFile);
     });
 
-    createHotel(formData);
+    if (isEdit) {
+      updateHotel(formData);
+    } else {
+      createHotel(formData);
+    }
   });
 
   return (
@@ -62,12 +90,14 @@ const ManageHotelForm = () => {
         <ImageSection />
         <span className='flex justify-end'>
           <Button
-            disabled={isLoading}
+            disabled={isEditLoading || isCreateLoading}
             type='submit'
             className='bg-blue-700 text-white font-semibold text-xl hover:bg-blue-600 flex items-center'
           >
-            {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-            {isLoading ? 'Saving...' : 'Save'}
+            {(isCreateLoading || isEditLoading) && (
+              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            )}
+            {isCreateLoading || isEditLoading ? 'Saving...' : 'Save'}
           </Button>
         </span>
       </form>
