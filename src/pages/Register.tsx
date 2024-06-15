@@ -1,7 +1,9 @@
 import { useRegisterUser } from '@/api/UserApi';
 import { Button } from '@/components/ui/button';
+import { useAppContext } from '@/contexts/App.Context';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 
 export type RegisterFormData = {
   firstName: string;
@@ -21,9 +23,15 @@ const Register = () => {
 
   const { registerUser, isLoading } = useRegisterUser();
 
+  const { isLoggedIn } = useAppContext();
+
   const onSubmit = handleSubmit((data) => {
     registerUser(data);
   });
+
+  if (isLoggedIn) {
+    return <Navigate to='/' replace />;
+  }
 
   return (
     <form className='flex flex-col gap-5' onSubmit={onSubmit}>
