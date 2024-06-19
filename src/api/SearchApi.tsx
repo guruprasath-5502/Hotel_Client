@@ -1,4 +1,4 @@
-import { HotelSearchResponse } from '@/types';
+import { Hotel, HotelSearchResponse } from '@/types';
 import { useQuery } from 'react-query';
 
 export type SearchParams = {
@@ -56,6 +56,34 @@ export const useSearchHotels = (searchParams: SearchParams) => {
 
   return {
     hotelData,
+    isLoading,
+  };
+};
+
+export const useGetHotelById = (hotelId?: string) => {
+  const getHotelRequestById = async (): Promise<Hotel> => {
+    const response = await fetch(
+      `${API_BASE_URL}/api/hotels/search/${hotelId}`
+    );
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch hotel');
+    }
+
+    return response.json();
+  };
+
+  const { data: hotel, isLoading } = useQuery(
+    'fetchHotelById',
+    getHotelRequestById,
+    {
+      enabled: !!hotelId,
+      retry: false,
+    }
+  );
+
+  return {
+    hotel,
     isLoading,
   };
 };

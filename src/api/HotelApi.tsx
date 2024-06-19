@@ -63,7 +63,7 @@ export const useGetHotels = () => {
   };
 };
 
-export const useGetHotelsById = (hotelId: string) => {
+export const useGetMyHotelsById = (hotelId: string) => {
   const getHotelsByIdRequest = async (): Promise<Hotel> => {
     const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
       credentials: 'include',

@@ -1,7 +1,7 @@
 import { RegisterFormData } from '@/pages/Register';
 import { SignInFormData } from '@/pages/SignIn';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -9,6 +9,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 export const useRegisterUser = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   const registerUserRequest = async (formData: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/users/register`, {
       method: 'POST',
@@ -43,7 +44,9 @@ export const useRegisterUser = () => {
 
 export const useSignInUser = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
+
   const signInUserRequest = async (formData: SignInFormData) => {
     const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
       method: 'POST',
@@ -63,7 +66,7 @@ export const useSignInUser = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries('validateToken');
       toast.success('User Signed In Successfully');
-      navigate('/');
+      navigate(location.state?.from?.pathname || '/');
     },
     onError: () => {
       toast.error('Invalid Credentials');
