@@ -1,6 +1,6 @@
 import { useRegisterUser } from '@/api/UserApi';
 import { Button } from '@/components/ui/button';
-import { useAppContext } from '@/contexts/App.Context';
+import { useAppContext } from '@/contexts/AppContext';
 import { Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';

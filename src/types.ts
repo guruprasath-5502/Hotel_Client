@@ -25,3 +25,17 @@ export type AllHotels = {
   status: boolean;
   data: HotelObj[];
 };
+
+export type HotelSearchResponse = {
+  status: boolean;
+  data: HotelSearchResponseObj;
+};
+
+type HotelSearchResponseObj = {
+  hotels: HotelObj[];
+  pagination: {
+    total: number;
+    page: number;
+    pages: number;
+  };
+};

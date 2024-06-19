@@ -125,3 +125,20 @@
         @apply bg-background text-foreground;
     }
 }
+
+  ::-webkit-scrollbar {
+      width: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: #3B82F6;
+      border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+      background: #2563EB;
+  }
+
+  html {
+      scroll-behavior: smooth;
+  }

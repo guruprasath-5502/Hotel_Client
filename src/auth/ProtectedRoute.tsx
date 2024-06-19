@@ -1,5 +1,5 @@
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { useAppContext } from '@/contexts/App.Context';
+import { useAppContext } from '@/contexts/AppContext';
 import { Navigate, Outlet } from 'react-router-dom';
 
 const ProtectedRoute = () => {

@@ -61,7 +61,7 @@ const SignIn = () => {
         <Button
           type='submit'
           disabled={isLoading}
-          className='bg-blue-700 text-white font-bold text-xl hover:bg-blue-600 '
+          className='bg-blue-700 text-white font-bold text-xl hover:bg-blue-600'
         >
           {isLoading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
           Sign In

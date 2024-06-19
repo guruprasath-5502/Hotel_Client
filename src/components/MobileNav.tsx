@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet';
-import { useAppContext } from '@/contexts/App.Context';
+import { useAppContext } from '@/contexts/AppContext';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import { useSignOutUser } from '@/api/UserApi';

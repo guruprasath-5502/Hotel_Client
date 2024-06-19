@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from './ui/button';
-import { useAppContext } from '@/contexts/App.Context';
+import { useAppContext } from '@/contexts/AppContext';
 import { useSignOutUser } from '@/api/UserApi';
 import { Loader2 } from 'lucide-react';
 
