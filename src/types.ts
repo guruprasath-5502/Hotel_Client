@@ -25,13 +25,14 @@ export type HotelObj = {
 export type BookingType = {
   _id: string;
   userId: string;
-  firstname: string;
-  lastname: string;
-  adultConut: number;
+  firstName: string;
+  lastName: string;
+  adultCount: number;
   childCount: number;
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+  email: string;
 };
 
 export type AllHotels = {

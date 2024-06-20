@@ -1,6 +1,6 @@
 import { RegisterFormData } from '@/pages/Register';
 import { SignInFormData } from '@/pages/SignIn';
-import { UserType } from '@/types';
+import { AllHotels, UserType } from '@/types';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -144,7 +144,7 @@ export const useGetCurrentUser = () => {
     });
 
     if (!response.ok) {
-      throw new Error('Error fetching uuser');
+      throw new Error('Error fetching user');
     }
 
     return response.json();
@@ -160,6 +160,33 @@ export const useGetCurrentUser = () => {
 
   return {
     user,
+    isLoading,
+  };
+};
+
+export const useUserBookings = () => {
+  const getCurrentUserBookingsRequest = async (): Promise<AllHotels> => {
+    const response = await fetch(`${API_BASE_URL}/api/my-bookings`, {
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error fetching data');
+    }
+
+    return response.json();
+  };
+
+  const { data: bookings, isLoading } = useQuery(
+    'getUserBookings',
+    getCurrentUserBookingsRequest,
+    {
+      retry: false,
+    }
+  );
+
+  return {
+    bookings,
     isLoading,
   };
 };
