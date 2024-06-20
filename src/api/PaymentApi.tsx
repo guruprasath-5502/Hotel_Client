@@ -1,6 +1,7 @@
 import { BookingFormData } from '@/forms/BookingForms/BookingForm';
 import { PaymentIntentType } from '@/types';
 import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -45,6 +46,7 @@ export const useCreatePaymentIntent = (
 };
 
 export const useCreateBooking = () => {
+  const navigate = useNavigate();
   const createBooking = async (formData: BookingFormData) => {
     const response = await fetch(
       `${API_BASE_URL}/api/hotels/${formData.hotelId}/bookings`,
@@ -68,6 +70,7 @@ export const useCreateBooking = () => {
   const { mutate: bookRoom, isLoading } = useMutation(createBooking, {
     onSuccess: () => {
       toast.success('Room booked Successfully');
+      navigate('/my-bookings');
     },
     onError: () => {
       toast.error('Failed to book room');
