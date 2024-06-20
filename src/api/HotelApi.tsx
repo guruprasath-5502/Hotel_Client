@@ -94,6 +94,33 @@ export const useGetMyHotelsById = (hotelId: string) => {
   };
 };
 
+export const useGetAllHotels = () => {
+  const getAllHotelsRequest = async (): Promise<AllHotels> => {
+    const response = await fetch(`${API_BASE_URL}/api/hotels`);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch hotels');
+    }
+
+    return response.json();
+  };
+
+  const {
+    data: hotels,
+    isLoading,
+    error,
+  } = useQuery('fetchAllHotels', getAllHotelsRequest);
+
+  if (error) {
+    toast.error(error.toString());
+  }
+
+  return {
+    hotels,
+    isLoading,
+  };
+};
+
 export const useUpdateHotelById = () => {
   const updateHotelByIdRequest = async (formData: FormData): Promise<Hotel> => {
     const response = await fetch(

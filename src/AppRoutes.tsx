@@ -10,6 +10,7 @@ import Search from './pages/Search';
 import Details from './pages/Details';
 import Booking from './pages/Booking';
 import MyBookings from './pages/MyBookings';
+import Home from './pages/Home';
 
 const AppRoutes = () => {
   return (
@@ -18,7 +19,7 @@ const AppRoutes = () => {
         path='/'
         element={
           <Layout>
-            <span>Home Page</span>
+            <Home />
           </Layout>
         }
       />
