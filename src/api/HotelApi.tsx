@@ -64,7 +64,7 @@ export const useGetHotels = () => {
 };
 
 export const useGetMyHotelsById = (hotelId: string) => {
-  const getHotelsByIdRequest = async (): Promise<Hotel> => {
+  const getMyHotelsByIdRequest = async (): Promise<Hotel> => {
     const response = await fetch(`${API_BASE_URL}/api/my-hotels/${hotelId}`, {
       credentials: 'include',
     });
@@ -80,7 +80,7 @@ export const useGetMyHotelsById = (hotelId: string) => {
     data: hotel,
     isLoading,
     error,
-  } = useQuery('fetchHotelsById', getHotelsByIdRequest, {
+  } = useQuery('fetchHotelsById', getMyHotelsByIdRequest, {
     enabled: !!hotelId,
   });
 

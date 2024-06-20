@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { SingleDatePicker } from './SingleDatePicker';
+import { SingleDatePicker } from '../../components/SingleDatePicker';
 import { useSearchContext } from '@/contexts/SearchContext';
 import { useAppContext } from '@/contexts/AppContext';
-import { Button } from './ui/button';
+import { Button } from '../../components/ui/button';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type Props = { hotelId: string; pricePerNight: number };
@@ -14,7 +14,7 @@ type GuestInfoFormData = {
   childCount: number;
 };
 
-const GuestInfo = ({ hotelId, pricePerNight }: Props) => {
+const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const search = useSearchContext();
   const { isLoggedIn } = useAppContext();
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ const GuestInfo = ({ hotelId, pricePerNight }: Props) => {
       data.childCount
     );
 
-    navigate(`/hotel${hotelId}/booking`);
+    navigate(`/hotel/${hotelId}/booking`);
   };
 
   return (
@@ -173,4 +173,4 @@ const GuestInfo = ({ hotelId, pricePerNight }: Props) => {
   );
 };
 
-export default GuestInfo;
+export default GuestInfoForm;

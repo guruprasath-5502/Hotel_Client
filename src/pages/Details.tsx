@@ -1,5 +1,5 @@
 import { useGetHotelById } from '@/api/SearchApi';
-import GuestInfo from '@/components/GuestInfo';
+import GuestInfoForm from '@/forms/GuestInfoForms/GuestInfoForm';
 import { AiFillStar } from 'react-icons/ai';
 import { useParams } from 'react-router-dom';
 
@@ -40,7 +40,7 @@ const Details = () => {
       <div className='grid grid-cols-1 lg:grid-cols-[3fr_1fr]'>
         <div className='whitespace-pre-line'>{hotel.data.description}</div>
         <div className='h-fit'>
-          <GuestInfo
+          <GuestInfoForm
             hotelId={hotel.data._id}
             pricePerNight={hotel.data.pricePerNight}
           />

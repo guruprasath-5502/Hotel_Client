@@ -1,5 +1,6 @@
 import { RegisterFormData } from '@/pages/Register';
 import { SignInFormData } from '@/pages/SignIn';
+import { UserType } from '@/types';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
@@ -132,6 +133,33 @@ export const useValidateToken = () => {
   return {
     validateToken,
     isError,
+    isLoading,
+  };
+};
+
+export const useGetCurrentUser = () => {
+  const getCurrentUserRequest = async (): Promise<UserType> => {
+    const response = await fetch(`${API_BASE_URL}/api/users/me`, {
+      credentials: 'include',
+    });
+
+    if (!response.ok) {
+      throw new Error('Error fetching uuser');
+    }
+
+    return response.json();
+  };
+
+  const { data: user, isLoading } = useQuery(
+    'getCurrentUser',
+    getCurrentUserRequest,
+    {
+      retry: false,
+    }
+  );
+
+  return {
+    user,
     isLoading,
   };
 };
